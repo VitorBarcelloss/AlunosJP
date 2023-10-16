@@ -1,23 +1,40 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>Cadastrar Aluno</title>
 </head>
 <body>
-<h2>Cadastrar aluno</h2>
-	<form action="ConfirmarCadastroServlet" method="post">
-		Nome:
-		<input type="text" name="nome">
-		Idade:
-		<input type="text" name="idade">
-		Genero:
-		<input type="text" name="genero">
-		Semestre:
-		<input type="text" name="semestre">
-		<input type="submit" value="Cadastrar">
-	</form>
+
+<h1> Cadastro Aluno</h1>
+
+<form action="ConfirmarCadastroServlet"  method="post">
+	Nome: <input type="text" name="nome" required><br><br>
+	
+	Idade: <input type="text" name="idade" required><br><br>
+	
+	Semestre:
+	<select name="semestre">
+		<option value="Primeiro">Primeiro</option>
+		<option value="Segundo">Segundo</option>	
+	</select><br><br>
+	
+	Gênero:
+	<input type="radio" name="genero" value="Masculino">
+	Masculino
+	<input type="radio" name="genero" value="Feminino">
+	Feminino
+	<br><br>
+	
+	
+	<input type="submit" value="Confirmar Cadastro">
+	<a href="listarAlunos.jsp">Voltar</a>
+</form>
+
+
+
+
 </body>
 </html>

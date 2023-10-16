@@ -1,6 +1,7 @@
 package com.senac.jp.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import com.senac.jp.dao.AlunoJDBCdao;
@@ -16,36 +17,34 @@ import jakarta.servlet.http.HttpSession;
  * Servlet implementation class LoginServlet
  */
 public class LoginServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-  
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String usuario = (String) request.getParameter("usuario");
-		String password = (String) request.getParameter("senha");
+private static final long serialVersionUID = 1L;
+       
+   
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
 		
-		if(usuario.equals("admin") && password.equals("admin")
-				&& usuario != null && password != null) {
+		String usuario = request.getParameter("usuario");
+		String senha = request.getParameter("senha");
+		
+		if(usuario.equals("admin")  && senha.equals("admin")) {
 			HttpSession session = request.getSession();
-			session.setMaxInactiveInterval(10);
 			session.setAttribute("usuario", usuario);
+			
 			AlunoJDBCdao dao = new AlunoJDBCdao();
-			
-			
+			List<Aluno> listaAlunos;
 			try {
-				List<Aluno>  listaAlunos = dao.listarAlunos();
-				request.setAttribute("alunos", listaAlunos);
-				request.getRequestDispatcher("listarAlunos.jsp").forward(request, response);
-			} catch (ClassNotFoundException e) {
+				listaAlunos = dao.listarAlunos();
+				request.setAttribute("listaAlunos", listaAlunos);
+			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			
-			
-		}else {
-			request.setAttribute("message", "Usuario ou senha incorreto, tente novamente!");
+			request.getRequestDispatcher("listarAlunos.jsp").forward(request, response);
+		} else {
+			request.setAttribute("mensagem", "Usuario e/ou senha inválida");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
-		
+
 	}
 
 }

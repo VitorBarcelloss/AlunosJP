@@ -11,6 +11,13 @@ public class Aluno {
 	public Aluno() {
 	
 	}
+	public Aluno(String nome, String idade, String semestre, String genero) {
+		super();
+		this.nome = nome;
+		this.idade = idade;
+		this.semestre = semestre;
+		this.genero = genero;
+	}
 	public Aluno(String nome, String idade, String semestre, String genero, String matricula) {
 		super();
 		this.nome = nome;
